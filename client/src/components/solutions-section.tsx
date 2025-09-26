@@ -53,7 +53,7 @@ const SolutionsSection = () => {
               return (
                 <motion.div
                   key={solution.id}
-                  className="tech-grid-item p-8 rounded-2xl shadow-lg cursor-pointer"
+                  className="tech-grid-item p-8 rounded-2xl shadow-lg cursor-pointer group"
                   initial={{ opacity: 0, y: 50 }}
                   animate={
                     isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
@@ -63,11 +63,13 @@ const SolutionsSection = () => {
                   onClick={() => openModal(solution.id)}
                   data-testid={`solution-card-${solution.id}`}
                 >
-                  <img
-                    src={solution.imageUrl}
-                    alt={solution.title}
-                    className="w-full h-48 object-cover rounded-xl mb-6"
-                  />
+                  <div className="w-full h-48 rounded-xl mb-6 overflow-hidden bg-muted">
+                    <img
+                      src={solution.imageUrl}
+                      alt={solution.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                   <div className="text-center">
                     <IconComponent className="w-10 h-10 text-primary mb-4 mx-auto" />
                     <h3 className="text-2xl font-semibold mb-4">

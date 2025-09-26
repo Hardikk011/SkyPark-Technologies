@@ -98,7 +98,7 @@ export const solutions: Solution[] = [
     id: 'networking',
     title: 'Network Infrastructure',
     description: 'High-performance networking solutions with redundancy, load balancing, and optimized data flow management for enterprise environments.',
-    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+    imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
     icon: 'network-wired',
     category: 'Infrastructure',
     features: [

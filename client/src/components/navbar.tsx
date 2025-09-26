@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "wouter";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,7 +16,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId: string, isRoute?: boolean) => {
+    if (isRoute) {
+      // For routes, let the Link component handle navigation
+      setIsMobileMenuOpen(false);
+      return;
+    }
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -28,6 +34,7 @@ const Navbar = () => {
     { label: "About Us", id: "about" },
     { label: "Partners", id: "partners" },
     { label: "Solutions", id: "solutions" },
+    { label: "Contact", id: "contact", isRoute: true },
   ];
 
   return (
@@ -58,18 +65,37 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item, index) => (
-                <motion.button
-                  key={item.id}
-                  className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
-                  onClick={() => scrollToSection(item.id)}
-                  whileHover={{ scale: 1.05 }}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  data-testid={`nav-${item.id}`}
-                >
-                  {item.label}
-                </motion.button>
+                item.isRoute ? (
+                  <motion.div
+                    key={item.id}
+                    whileHover={{ scale: 1.05 }}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link href="/contact">
+                      <span
+                        className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors cursor-pointer"
+                        data-testid={`nav-${item.id}`}
+                      >
+                        {item.label}
+                      </span>
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.button
+                    key={item.id}
+                    className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
+                    onClick={() => scrollToSection(item.id, item.isRoute)}
+                    whileHover={{ scale: 1.05 }}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    data-testid={`nav-${item.id}`}
+                  >
+                    {item.label}
+                  </motion.button>
+                )
               ))}
             </div>
           </div>
@@ -97,14 +123,26 @@ const Navbar = () => {
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary w-full text-left"
-                  onClick={() => scrollToSection(item.id)}
-                  data-testid={`mobile-nav-${item.id}`}
-                >
-                  {item.label}
-                </button>
+                item.isRoute ? (
+                  <Link key={item.id} href="/contact">
+                    <span
+                      className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary w-full text-left cursor-pointer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      data-testid={`mobile-nav-${item.id}`}
+                    >
+                      {item.label}
+                    </span>
+                  </Link>
+                ) : (
+                  <button
+                    key={item.id}
+                    className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary w-full text-left"
+                    onClick={() => scrollToSection(item.id, item.isRoute)}
+                    data-testid={`mobile-nav-${item.id}`}
+                  >
+                    {item.label}
+                  </button>
+                )
               ))}
             </div>
           </motion.div>

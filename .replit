@@ -19,8 +19,8 @@ localPort = 32793
 externalPort = 3000
 
 [[ports]]
-localPort = 35361
-externalPort = 3002
+localPort = 34629
+externalPort = 3003
 
 [[ports]]
 localPort = 44737
@@ -49,3 +49,6 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[agent]
+integrations = ["javascript_database:1.0.0"]

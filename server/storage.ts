@@ -1,6 +1,4 @@
-import { type User, type InsertUser, type DemoRequest, type InsertDemoRequest, users, demoRequests } from "@shared/schema";
-import { db } from "./db";
-import { eq } from "drizzle-orm";
+import type { User, InsertUser, DemoRequest, InsertDemoRequest } from "@shared/schema";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -13,36 +11,44 @@ export interface IStorage {
   getDemoRequests(): Promise<DemoRequest[]>;
 }
 
-export class DatabaseStorage implements IStorage {
+// Simple in-memory storage for development without a database
+const usersMemory: User[] = [];
+const demoRequestsMemory: DemoRequest[] = [];
+
+export class InMemoryStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
+    return usersMemory.find(u => u.id === id);
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user || undefined;
+    return usersMemory.find(u => u.username === username);
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db
-      .insert(users)
-      .values(insertUser)
-      .returning();
+    const user: User = {
+      id: globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36).slice(2),
+      username: insertUser.username,
+      password: insertUser.password,
+    };
+    usersMemory.push(user);
     return user;
   }
 
   async createDemoRequest(demoRequest: InsertDemoRequest): Promise<DemoRequest> {
-    const [demo] = await db
-      .insert(demoRequests)
-      .values(demoRequest)
-      .returning();
-    return demo;
+    const record: DemoRequest = {
+      id: globalThis.crypto?.randomUUID?.() ?? Math.random().toString(36).slice(2),
+      email: demoRequest.email,
+      solution: demoRequest.solution,
+      message: demoRequest.message,
+      createdAt: new Date(),
+    };
+    demoRequestsMemory.push(record);
+    return record;
   }
 
   async getDemoRequests(): Promise<DemoRequest[]> {
-    return await db.select().from(demoRequests);
+    return [...demoRequestsMemory];
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new InMemoryStorage();

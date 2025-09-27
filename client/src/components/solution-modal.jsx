@@ -9,13 +9,7 @@ import { getSolutionById } from "@/lib/solutions-data";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 
-interface SolutionModalProps {
-  solutionId: string | null;
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const SolutionModal = ({ solutionId, isOpen, onClose }: SolutionModalProps) => {
+const SolutionModal = ({ solutionId, isOpen, onClose }) => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const { toast } = useToast();
@@ -23,7 +17,7 @@ const SolutionModal = ({ solutionId, isOpen, onClose }: SolutionModalProps) => {
   const solution = solutionId ? getSolutionById(solutionId) : null;
 
   const demoRequestMutation = useMutation({
-    mutationFn: async (data: { email: string; solution: string; message?: string }) => {
+    mutationFn: async (data) => {
       return apiRequest("POST", "/api/demo-requests", data);
     },
     onSuccess: () => {
@@ -44,7 +38,7 @@ const SolutionModal = ({ solutionId, isOpen, onClose }: SolutionModalProps) => {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !solution) return;
 
@@ -55,7 +49,7 @@ const SolutionModal = ({ solutionId, isOpen, onClose }: SolutionModalProps) => {
     });
   };
 
-  const handleBackdropClick = (e: React.MouseEvent) => {
+  const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -175,3 +169,6 @@ const SolutionModal = ({ solutionId, isOpen, onClose }: SolutionModalProps) => {
 };
 
 export default SolutionModal;
+
+
+

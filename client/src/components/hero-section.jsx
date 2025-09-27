@@ -28,7 +28,6 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center hero-background overflow-hidden"
     >
-      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
@@ -39,7 +38,6 @@ const HeroSection = () => {
         <div className="gradient-overlay absolute inset-0"></div>
       </div>
 
-      {/* Content */}
       <div className="relative z-10 text-center text-white max-w-5xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -92,7 +90,6 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Floating Tech Icons */}
         <motion.div
           className="absolute top-20 left-10 hidden lg:block"
           animate={{ y: [0, -20, 0] }}
@@ -128,7 +125,6 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
         onClick={scrollToNext}
@@ -143,3 +139,6 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+
+

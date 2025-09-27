@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -186,3 +186,6 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
+

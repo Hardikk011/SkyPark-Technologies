@@ -16,25 +16,32 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string, isRoute?: boolean) => {
+  const scrollToSection = (sectionId, isRoute) => {
     if (isRoute) {
-      // For routes, let the Link component handle navigation
       setIsMobileMenuOpen(false);
       return;
     }
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    
+    // Check if we're on the home page
+    if (window.location.pathname === '/') {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
+    } else {
+      // If not on home page, navigate to home and then scroll
+      window.location.href = `/#${sectionId}`;
       setIsMobileMenuOpen(false);
     }
   };
 
   const navItems = [
-    { label: "Home", id: "home" },
+    { label: "Home", id: "home", isRoute: true, href: "/" },
     { label: "About Us", id: "about" },
     { label: "Partners", id: "partners" },
     { label: "Solutions", id: "solutions" },
-    { label: "Contact", id: "contact", isRoute: true },
+    { label: "Contact", id: "contact", isRoute: true, href: "/contact" },
   ];
 
   return (
@@ -51,17 +58,17 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <motion.div
-              className="text-2xl font-bold text-primary cursor-pointer"
-              onClick={() => scrollToSection("home")}
-              whileHover={{ scale: 1.05 }}
-              data-testid="logo-skypark"
-            >
-              Skypark <span className="font-light">Technologies</span>
-            </motion.div>
+            <Link href="/">
+              <motion.div
+                className="text-2xl font-bold text-primary cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                data-testid="logo-skypark"
+              >
+                Skypark <span className="font-light">Technologies</span>
+              </motion.div>
+            </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item, index) => (
@@ -73,7 +80,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <Link href="/contact">
+                    <Link href={item.href || "/"}>
                       <span
                         className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors cursor-pointer"
                         data-testid={`nav-${item.id}`}
@@ -100,7 +107,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <motion.button
               className="text-foreground hover:text-primary"
@@ -113,7 +119,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <motion.div
             className="md:hidden bg-white border-t border-border"
@@ -124,7 +129,7 @@ const Navbar = () => {
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
                 item.isRoute ? (
-                  <Link key={item.id} href="/contact">
+                  <Link key={item.id} href={item.href || "/"}>
                     <span
                       className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary w-full text-left cursor-pointer"
                       onClick={() => setIsMobileMenuOpen(false)}
@@ -153,3 +158,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

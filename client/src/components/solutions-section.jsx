@@ -8,9 +8,9 @@ import SolutionModal from "./solution-modal";
 const SolutionsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [selectedSolution, setSelectedSolution] = useState<string | null>(null);
+  const [selectedSolution, setSelectedSolution] = useState(null);
 
-  const iconMap: Record<string, any> = {
+  const iconMap = {
     "shield-alt": Shield,
     "lock": Lock,
     "server": Server,
@@ -19,7 +19,7 @@ const SolutionsSection = () => {
     "users-cog": Users,
   };
 
-  const openModal = (solutionId: string) => {
+  const openModal = (solutionId) => {
     setSelectedSolution(solutionId);
   };
 
@@ -49,7 +49,6 @@ const SolutionsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {solutions.map((solution, index) => {
               const IconComponent = iconMap[solution.icon];
-              
               return (
                 <motion.div
                   key={solution.id}
@@ -104,3 +103,6 @@ const SolutionsSection = () => {
 };
 
 export default SolutionsSection;
+
+
+

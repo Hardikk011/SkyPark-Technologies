@@ -27,7 +27,7 @@ const Contact = () => {
     },
     {
       company: "Medusind Solution",
-      position: "L3 Network Engineer", 
+      position: "L3 Network Engineer",
       duration: "Oct 2022 - April 2023",
       type: "Previous Role"
     },
@@ -40,7 +40,7 @@ const Contact = () => {
     {
       company: "WIPRO Ltd (Gujarat Gas Ltd)",
       position: "L3 Network Engineer",
-      duration: "May 2018 - Jan 2019", 
+      duration: "May 2018 - Jan 2019",
       type: "Previous Role"
     }
   ];
@@ -63,8 +63,6 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      
-      {/* Hero Section */}
       <section className="pt-20 pb-16 bg-primary text-primary-foreground">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -83,12 +81,9 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Main Content */}
       <section className="py-20 bg-background" ref={ref}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            
-            {/* Contact Information */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
@@ -124,7 +119,6 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Current Position */}
                 <div className="bg-muted p-6 rounded-lg">
                   <h3 className="text-xl font-semibold mb-3">Current Position</h3>
                   <p className="text-primary font-semibold">Advantmed India LLP</p>
@@ -134,7 +128,6 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            {/* Professional Summary */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
@@ -176,7 +169,6 @@ const Contact = () => {
             </motion.div>
           </div>
 
-          {/* Technical Skills */}
           <motion.div
             className="mt-16"
             initial={{ opacity: 0, y: 50 }}
@@ -199,7 +191,6 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Experience Timeline */}
           <motion.div
             className="mt-16"
             initial={{ opacity: 0, y: 50 }}
@@ -229,7 +220,6 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Key Achievements */}
           <motion.div
             className="mt-16"
             initial={{ opacity: 0, y: 50 }}
@@ -255,7 +245,6 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Certifications */}
           <motion.div
             className="mt-16"
             initial={{ opacity: 0, y: 50 }}
@@ -287,3 +276,6 @@ const Contact = () => {
 };
 
 export default Contact;
+
+
+

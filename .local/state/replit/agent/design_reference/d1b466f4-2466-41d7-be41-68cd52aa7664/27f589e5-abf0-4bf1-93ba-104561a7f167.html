@@ -1,0 +1,763 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skypark Technologies - Premium IT Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    sans: ["Inter", "system-ui", "sans-serif"],
+                },
+                animation: {
+                    'fade-in': 'fadeIn 0.6s ease-out',
+                    'slide-up': 'slideUp 0.8s ease-out',
+                    'scale-in': 'scaleIn 0.5s ease-out',
+                    'float': 'float 6s ease-in-out infinite',
+                }
+            },
+        }
+    };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --background: hsl(0 0% 100%);
+            --foreground: hsl(0 0% 9%);
+            --card: hsl(0 0% 100%);
+            --card-foreground: hsl(0 0% 9%);
+            --primary: hsl(0 0% 9%);
+            --primary-foreground: hsl(0 0% 98%);
+            --secondary: hsl(0 0% 96%);
+            --secondary-foreground: hsl(0 0% 9%);
+            --muted: hsl(0 0% 96%);
+            --muted-foreground: hsl(0 0% 45%);
+            --accent: hsl(0 0% 96%);
+            --accent-foreground: hsl(0 0% 9%);
+            --border: hsl(0 0% 90%);
+            --input: hsl(0 0% 90%);
+            --ring: hsl(0 0% 63%);
+            --radius: 0.5rem;
+        }
+
+        * {
+            border-color: var(--border);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes scaleIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-backdrop {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tech-grid-item {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .tech-grid-item:hover {
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            border-color: rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .hero-background {
+            background: linear-gradient(135deg, #000000 0%, #434343 100%);
+        }
+
+        .partner-logo {
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground">
+    <!-- @COMPONENT: Navigation -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-border z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-primary">
+                        Skypark <span class="font-light">Technologies</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="#about" class="text-muted-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors">About Us</a>
+                        <a href="#partners" class="text-muted-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Partners</a>
+                        <a href="#solutions" class="text-muted-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Solutions</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-foreground hover:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- @COMPONENT: Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center hero-background overflow-hidden">
+        <!-- Modern office technology workspace with multiple monitors and sleek setup -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');">
+            <div class="gradient-overlay absolute inset-0"></div>
+        </div>
+        
+        <div class="relative z-10 text-center text-white max-w-5xl mx-auto px-4">
+            <div class="animate-fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Next-Gen <span class="font-light">IT Solutions</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto font-light leading-relaxed">
+                    Empowering enterprises with cutting-edge technology infrastructure, cybersecurity, and cloud solutions for the digital future.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
+                    <button class="bg-white text-black px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+                        Explore Solutions
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-black transition-all duration-300">
+                        Schedule Demo
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Floating tech icons -->
+            <div class="absolute top-20 left-10 animate-float hidden lg:block">
+                <i class="fas fa-cloud text-4xl text-white/20"></i>
+            </div>
+            <div class="absolute bottom-20 right-10 animate-float hidden lg:block" style="animation-delay: 2s;">
+                <i class="fas fa-shield-alt text-4xl text-white/20"></i>
+            </div>
+            <div class="absolute top-1/2 left-20 animate-float hidden lg:block" style="animation-delay: 4s;">
+                <i class="fas fa-network-wired text-3xl text-white/20"></i>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div class="animate-bounce">
+                <i class="fas fa-chevron-down text-white text-2xl"></i>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Hero Section -->
+
+    <!-- @COMPONENT: About Section -->
+    <section id="about" class="py-20 bg-muted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="animate-on-scroll text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">About Skypark Technologies</h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                    Leading the digital transformation journey with innovative IT solutions, strategic consulting, and world-class support services.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <!-- Professional IT team collaborating in modern office environment -->
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Professional IT team collaboration" class="rounded-2xl shadow-2xl w-full h-auto" />
+                </div>
+                
+                <div class="animate-on-scroll space-y-8">
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-primary text-primary-foreground p-3 rounded-lg">
+                            <i class="fas fa-rocket text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Innovation First</h3>
+                            <p class="text-muted-foreground">Pioneering next-generation solutions with cutting-edge technology and forward-thinking approaches.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-primary text-primary-foreground p-3 rounded-lg">
+                            <i class="fas fa-users text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Expert Team</h3>
+                            <p class="text-muted-foreground">Certified professionals with deep expertise in enterprise-grade IT infrastructure and security.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-primary text-primary-foreground p-3 rounded-lg">
+                            <i class="fas fa-award text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Proven Results</h3>
+                            <p class="text-muted-foreground">Track record of successful implementations across diverse industries and enterprise environments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: About Section -->
+
+    <!-- @COMPONENT: Partners Section -->
+    <section id="partners" class="py-20 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="animate-on-scroll text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Trusted Partners</h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Collaborating with industry leaders to deliver comprehensive technology solutions and enterprise-grade services.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center justify-items-center">
+                <!-- Reliance Logo -->
+                <div class="animate-on-scroll hover-lift bg-card p-8 rounded-2xl shadow-lg w-full max-w-sm flex items-center justify-center">
+                    <!-- CUSTOM ICON: Reliance Industries logo -->
+                    <div class="partner-logo">
+                        <div class="text-4xl font-bold text-primary">RELIANCE</div>
+                        <div class="text-sm text-muted-foreground text-center mt-2">Industries Limited</div>
+                    </div>
+                </div>
+
+                <!-- Polycab Logo -->
+                <div class="animate-on-scroll hover-lift bg-card p-8 rounded-2xl shadow-lg w-full max-w-sm flex items-center justify-center">
+                    <!-- CUSTOM ICON: Polycab logo -->
+                    <div class="partner-logo">
+                        <div class="text-4xl font-bold text-primary">POLYCAB</div>
+                        <div class="text-sm text-muted-foreground text-center mt-2">India Limited</div>
+                    </div>
+                </div>
+
+                <!-- Zydus Logo -->
+                <div class="animate-on-scroll hover-lift bg-card p-8 rounded-2xl shadow-lg w-full max-w-sm flex items-center justify-center">
+                    <!-- CUSTOM ICON: Zydus Lifesciences logo -->
+                    <div class="partner-logo">
+                        <div class="text-4xl font-bold text-primary">ZYDUS</div>
+                        <div class="text-sm text-muted-foreground text-center mt-2">Lifesciences</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="animate-on-scroll text-center mt-16">
+                <p class="text-lg text-muted-foreground">
+                    Join <span class="font-semibold text-primary">500+</span> enterprises who trust Skypark Technologies for their digital infrastructure needs.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Partners Section -->
+
+    <!-- @COMPONENT: Solutions Section -->
+    <section id="solutions" class="py-20 bg-muted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="animate-on-scroll text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">IT Solutions Portfolio</h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                    Comprehensive technology solutions designed to transform your business operations and enhance digital capabilities.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- L1 Firewall Solution -->
+                <div class="animate-on-scroll tech-grid-item p-8 rounded-2xl shadow-lg hover-lift cursor-pointer" onclick="openModal('l1-firewall')">
+                    <!-- Cybersecurity firewall protection visualization -->
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="L1 Firewall Security" class="w-full h-48 object-cover rounded-xl mb-6" />
+                    <div class="text-center">
+                        <i class="fas fa-shield-alt text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4">L1 Firewall Protection</h3>
+                        <p class="text-muted-foreground mb-6">Enterprise-grade network security with advanced threat detection and real-time monitoring capabilities.</p>
+                        <button class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Know More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- L2 Firewall Solution -->
+                <div class="animate-on-scroll tech-grid-item p-8 rounded-2xl shadow-lg hover-lift cursor-pointer" onclick="openModal('l2-firewall')">
+                    <!-- Advanced network security infrastructure -->
+                    <img src="https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="L2 Firewall Advanced Security" class="w-full h-48 object-cover rounded-xl mb-6" />
+                    <div class="text-center">
+                        <i class="fas fa-lock text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4">L2 Advanced Firewall</h3>
+                        <p class="text-muted-foreground mb-6">Next-generation firewall with deep packet inspection and application-level security controls.</p>
+                        <button class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Know More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- L3 Firewall Solution -->
+                <div class="animate-on-scroll tech-grid-item p-8 rounded-2xl shadow-lg hover-lift cursor-pointer" onclick="openModal('l3-firewall')">
+                    <!-- Enterprise network security operations center -->
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="L3 Enterprise Firewall" class="w-full h-48 object-cover rounded-xl mb-6" />
+                    <div class="text-center">
+                        <i class="fas fa-server text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4">L3 Enterprise Firewall</h3>
+                        <p class="text-muted-foreground mb-6">Complete network infrastructure protection with AI-powered threat intelligence and automated response.</p>
+                        <button class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Know More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cloud Solutions -->
+                <div class="animate-on-scroll tech-grid-item p-8 rounded-2xl shadow-lg hover-lift cursor-pointer" onclick="openModal('cloud-solutions')">
+                    <!-- Modern cloud computing data center -->
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="Cloud Solutions Infrastructure" class="w-full h-48 object-cover rounded-xl mb-6" />
+                    <div class="text-center">
+                        <i class="fas fa-cloud text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4">Cloud Solutions</h3>
+                        <p class="text-muted-foreground mb-6">Scalable cloud infrastructure with hybrid deployment options and enterprise-grade security.</p>
+                        <button class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Know More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Network Infrastructure -->
+                <div class="animate-on-scroll tech-grid-item p-8 rounded-2xl shadow-lg hover-lift cursor-pointer" onclick="openModal('networking')">
+                    <!-- High-tech network infrastructure cabling and servers -->
+                    <img src="https://pixabay.com/get/g286ea3974c7703af3a6bf2204c558ac92c309672651b52dccf6a58e5d7e76a59ff19c76935a649fdf7c28e2fac15083dacad5004a972cca61b28cb0828a549b7_1280.jpg" alt="Network Infrastructure" class="w-full h-48 object-cover rounded-xl mb-6" />
+                    <div class="text-center">
+                        <i class="fas fa-network-wired text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4">Network Infrastructure</h3>
+                        <p class="text-muted-foreground mb-6">High-performance networking solutions with redundancy and optimized data flow management.</p>
+                        <button class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Know More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- IT Consulting -->
+                <div class="animate-on-scroll tech-grid-item p-8 rounded-2xl shadow-lg hover-lift cursor-pointer" onclick="openModal('consulting')">
+                    <!-- Professional IT consulting team meeting -->
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="IT Consulting Services" class="w-full h-48 object-cover rounded-xl mb-6" />
+                    <div class="text-center">
+                        <i class="fas fa-users-cog text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-semibold mb-4">IT Consulting</h3>
+                        <p class="text-muted-foreground mb-6">Strategic technology consulting and digital transformation guidance for enterprise growth.</p>
+                        <button class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Know More
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Solutions Section -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-primary text-primary-foreground py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Skypark Technologies</h3>
+                    <p class="text-gray-300 mb-4">Transforming businesses through innovative IT solutions and strategic technology partnerships.</p>
+                    <div class="flex space-x-4">
+                        <i class="fab fa-linkedin text-xl hover:text-gray-300 cursor-pointer transition-colors"></i>
+                        <i class="fab fa-twitter text-xl hover:text-gray-300 cursor-pointer transition-colors"></i>
+                        <i class="fab fa-facebook text-xl hover:text-gray-300 cursor-pointer transition-colors"></i>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Firewall Protection</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Cloud Infrastructure</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Network Solutions</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">IT Consulting</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Partners</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fas fa-envelope mr-2"></i> info@skypark.tech</p>
+                        <p><i class="fas fa-phone mr-2"></i> +91 98765 43210</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> Mumbai, India</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-300">
+                <p>&copy; 2024 Skypark Technologies. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <!-- @COMPONENT: Modal System -->
+    <div id="modal-backdrop" class="fixed inset-0 modal-backdrop hidden z-50 flex items-center justify-center p-4">
+        <div id="modal-content" class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+            <!-- Modal content will be populated by JavaScript -->
+        </div>
+    </div>
+    <!-- @END_COMPONENT: Modal System -->
+
+    <script>
+        // Scroll animations
+        (function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        })();
+
+        // Modal system
+        const modalData = {
+            'l1-firewall': {
+                title: 'L1 Firewall Protection',
+                description: 'Enterprise-grade network security solution providing comprehensive protection against cyber threats with real-time monitoring and automated response capabilities.',
+                features: [
+                    'Real-time threat detection and prevention',
+                    'Advanced intrusion detection system (IDS)',
+                    'Automated security policy enforcement',
+                    'Comprehensive logging and reporting',
+                    '24/7 security operations center support'
+                ],
+                specs: {
+                    'Throughput': 'Up to 10 Gbps',
+                    'Concurrent Sessions': '2 Million+',
+                    'VPN Support': 'IPSec, SSL/TLS',
+                    'High Availability': '99.99% uptime SLA'
+                }
+            },
+            'l2-firewall': {
+                title: 'L2 Advanced Firewall',
+                description: 'Next-generation firewall with deep packet inspection, application control, and integrated threat intelligence for comprehensive network security.',
+                features: [
+                    'Deep packet inspection (DPI)',
+                    'Application-level security controls',
+                    'Integrated threat intelligence feeds',
+                    'Advanced malware protection',
+                    'Centralized security management'
+                ],
+                specs: {
+                    'Throughput': 'Up to 40 Gbps',
+                    'Applications Identified': '3000+',
+                    'Security Services': 'IPS, Anti-malware, URL filtering',
+                    'Management': 'Centralized dashboard'
+                }
+            },
+            'l3-firewall': {
+                title: 'L3 Enterprise Firewall',
+                description: 'Complete network infrastructure protection with AI-powered threat intelligence, automated incident response, and enterprise-scale performance.',
+                features: [
+                    'AI-powered threat detection',
+                    'Automated incident response',
+                    'Advanced persistent threat (APT) protection',
+                    'Zero-day exploit prevention',
+                    'Enterprise-scale performance'
+                ],
+                specs: {
+                    'Throughput': 'Up to 100 Gbps',
+                    'AI Engine': 'Machine learning threat detection',
+                    'Response Time': 'Sub-millisecond',
+                    'Scalability': 'Enterprise-wide deployment'
+                }
+            },
+            'cloud-solutions': {
+                title: 'Cloud Solutions',
+                description: 'Scalable cloud infrastructure solutions with hybrid deployment options, enterprise security, and optimized performance for modern business needs.',
+                features: [
+                    'Multi-cloud deployment strategies',
+                    'Hybrid cloud integration',
+                    'Auto-scaling capabilities',
+                    'Enterprise-grade security',
+                    'Cost optimization tools'
+                ],
+                specs: {
+                    'Deployment': 'AWS, Azure, Google Cloud',
+                    'Scaling': 'Automatic resource allocation',
+                    'Security': 'End-to-end encryption',
+                    'Monitoring': '24/7 cloud operations'
+                }
+            },
+            'networking': {
+                title: 'Network Infrastructure',
+                description: 'High-performance networking solutions with redundancy, load balancing, and optimized data flow management for enterprise environments.',
+                features: [
+                    'High-speed data transmission',
+                    'Network redundancy and failover',
+                    'Load balancing and optimization',
+                    'Software-defined networking (SDN)',
+                    'Network monitoring and analytics'
+                ],
+                specs: {
+                    'Speed': 'Up to 400 Gbps',
+                    'Redundancy': 'Multiple failover paths',
+                    'Latency': 'Ultra-low latency design',
+                    'Management': 'Centralized network control'
+                }
+            },
+            'consulting': {
+                title: 'IT Consulting',
+                description: 'Strategic technology consulting services to guide digital transformation initiatives and optimize IT infrastructure for business growth.',
+                features: [
+                    'Digital transformation strategy',
+                    'IT infrastructure assessment',
+                    'Technology roadmap development',
+                    'Change management support',
+                    'Performance optimization'
+                ],
+                specs: {
+                    'Expertise': '20+ years industry experience',
+                    'Certifications': 'CISSP, CISA, PMP',
+                    'Methodology': 'Agile and DevOps practices',
+                    'Support': 'Ongoing strategic guidance'
+                }
+            }
+        };
+
+        function openModal(solutionId) {
+            const modal = modalData[solutionId];
+            if (!modal) return;
+
+            const modalContent = document.getElementById('modal-content');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+
+            modalContent.innerHTML = `
+                <div class="p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-primary">${modal.title}</h2>
+                        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 transition-colors">
+                            <i class="fas fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                    
+                    <p class="text-lg text-muted-foreground mb-8">${modal.description}</p>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Key Features</h3>
+                            <ul class="space-y-2">
+                                ${modal.features.map(feature => `
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-600 mr-3"></i>
+                                        <span>${feature}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Technical Specifications</h3>
+                            <div class="space-y-3">
+                                ${Object.entries(modal.specs).map(([key, value]) => `
+                                    <div class="flex justify-between py-2 border-b border-gray-200">
+                                        <span class="font-medium">${key}:</span>
+                                        <span class="text-muted-foreground">${value}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-muted p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-4">Request a Demo</h3>
+                        <p class="text-muted-foreground mb-4">Get a personalized demonstration of this solution and see how it can benefit your organization.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <input type="email" placeholder="Enter your email address" class="flex-1 px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring">
+                            <button class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                                Schedule Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modalBackdrop.classList.remove('hidden');
+            // Trigger animation
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 50);
+
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modalContent = document.getElementById('modal-content');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                modalBackdrop.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('modal-backdrop').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-white/95');
+                navbar.classList.remove('bg-white/80');
+            } else {
+                navbar.classList.add('bg-white/80');
+                navbar.classList.remove('bg-white/95');
+            }
+        });
+
+        // TODO: Implement form submission logic for demo requests
+        // TODO: Add analytics tracking for user interactions
+        // TODO: Implement backend API integration for contact forms
+    </script>
+</body>
+</html>

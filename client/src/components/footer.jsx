@@ -154,11 +154,15 @@ const Footer = () => {
             <div className="space-y-2 text-gray-300">
               <p className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
-                info@skypark.tech
+                info@skyparktechnologies.com
+              </p>
+              <p className="flex items-center">
+                <Mail className="w-4 h-4 mr-2" />
+                support@skyparktechnologies.com
               </p>
               <p className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
-                +91 98765 43210
+                +91 85111 23546
               </p>
               <p className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />

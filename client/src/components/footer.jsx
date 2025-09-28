@@ -162,11 +162,11 @@ const Footer = () => {
               </p>
               <p className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
-                +91 85111 23546
+                +91 70161 49008
               </p>
               <p className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />
-                Mumbai, India
+                Ahmedabad,Gujarat
               </p>
             </div>
           </motion.div>
@@ -180,7 +180,7 @@ const Footer = () => {
           viewport={{ once: true }}
         >
           <p>
-            &copy; 2024 Skypark Technologies. All rights reserved. | Privacy
+            &copy; 2025 Skypark Technologies. All rights reserved. | Privacy
             Policy | Terms of Service
           </p>
         </motion.div>

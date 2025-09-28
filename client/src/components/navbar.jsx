@@ -41,7 +41,7 @@ const Navbar = () => {
     { label: "About Us", id: "about" },
     { label: "Partners", id: "partners" },
     { label: "Solutions", id: "solutions" },
-    { label: "Contact", id: "contact", isRoute: true, href: "/contact" },
+    // { label: "Contact", id: "contact", isRoute: true, href: "/contact" },
   ];
 
   return (

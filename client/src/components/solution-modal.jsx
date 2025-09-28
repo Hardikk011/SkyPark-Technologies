@@ -141,20 +141,20 @@ const SolutionModal = ({ solutionId, isOpen, onClose }) => {
                   </h3>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="font-medium">Sales Team:</span>
-                      <span className="text-muted-foreground">sales@skypark.tech</span>
+                      <span className="font-medium">General Inquiries:</span>
+                      <span className="text-muted-foreground">info@skyparktechnologies.com</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="font-medium">Technical Support:</span>
-                      <span className="text-muted-foreground">support@skypark.tech</span>
+                      <span className="text-muted-foreground">support@skyparktechnologies.com</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="font-medium">Phone:</span>
-                      <span className="text-muted-foreground">+1 (555) 123-4567</span>
+                      <span className="text-muted-foreground">+91 85111 23546</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="font-medium">Business Hours:</span>
-                      <span className="text-muted-foreground">Mon-Fri 9AM-6PM EST</span>
+                      <span className="text-muted-foreground">Mon-Fri 9AM-6PM IST</span>
                     </div>
                   </div>
                 </div>

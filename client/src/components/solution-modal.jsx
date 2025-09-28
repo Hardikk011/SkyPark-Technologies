@@ -1,53 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check } from "lucide-react";
-import { useState } from "react";
+import { X, Check, Shield, Clock, Award, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import { getSolutionById } from "@/lib/solutions-data";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 
 const SolutionModal = ({ solutionId, isOpen, onClose }) => {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const { toast } = useToast();
-
   const solution = solutionId ? getSolutionById(solutionId) : null;
-
-  const demoRequestMutation = useMutation({
-    mutationFn: async (data) => {
-      return apiRequest("POST", "/api/demo-requests", data);
-    },
-    onSuccess: () => {
-      toast({
-        title: "Demo Request Submitted",
-        description: "We'll contact you soon to schedule your demo.",
-      });
-      setEmail("");
-      setMessage("");
-      onClose();
-    },
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to submit demo request. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!email || !solution) return;
-
-    demoRequestMutation.mutate({
-      email,
-      solution: solution.title,
-      message: message || undefined,
-    });
-  };
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -126,39 +83,81 @@ const SolutionModal = ({ solutionId, isOpen, onClose }) => {
                 </div>
               </div>
 
-              <div className="mt-8 bg-muted p-6 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Request a Demo</h3>
-                <p className="text-muted-foreground mb-4">
-                  Get a personalized demonstration of this solution and see how
-                  it can benefit your organization.
-                </p>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    data-testid="input-demo-email"
-                  />
-                  <Textarea
-                    placeholder="Additional message (optional)"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    rows={3}
-                    data-testid="textarea-demo-message"
-                  />
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={demoRequestMutation.isPending}
-                    data-testid="button-submit-demo"
-                  >
-                    {demoRequestMutation.isPending
-                      ? "Submitting..."
-                      : "Schedule Demo"}
-                  </Button>
-                </form>
+              <div className="mt-8 space-y-6">
+                <div className="bg-muted p-6 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Shield className="w-5 h-5 mr-2 text-primary" />
+                    Security & Compliance
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-center">
+                      <Check className="w-4 h-4 text-green-600 mr-2" />
+                      <span className="text-sm">ISO 27001 Certified</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="w-4 h-4 text-green-600 mr-2" />
+                      <span className="text-sm">SOC 2 Type II</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="w-4 h-4 text-green-600 mr-2" />
+                      <span className="text-sm">GDPR Compliant</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="w-4 h-4 text-green-600 mr-2" />
+                      <span className="text-sm">PCI DSS Certified</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-muted p-6 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Clock className="w-5 h-5 mr-2 text-primary" />
+                    Implementation Timeline
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="font-medium">Initial Assessment:</span>
+                      <span className="text-muted-foreground">1-2 weeks</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Solution Design:</span>
+                      <span className="text-muted-foreground">2-3 weeks</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Deployment:</span>
+                      <span className="text-muted-foreground">3-4 weeks</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Testing & Training:</span>
+                      <span className="text-muted-foreground">1-2 weeks</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-muted p-6 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Users className="w-5 h-5 mr-2 text-primary" />
+                    Contact Information
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="font-medium">Sales Team:</span>
+                      <span className="text-muted-foreground">sales@skypark.tech</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Technical Support:</span>
+                      <span className="text-muted-foreground">support@skypark.tech</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Phone:</span>
+                      <span className="text-muted-foreground">+1 (555) 123-4567</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Business Hours:</span>
+                      <span className="text-muted-foreground">Mon-Fri 9AM-6PM EST</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>

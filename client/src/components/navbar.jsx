@@ -60,11 +60,18 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link href="/">
               <motion.div
-                className="text-2xl font-bold text-primary cursor-pointer"
+                className="flex items-center gap-3 cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 data-testid="logo-skypark"
               >
-                Skypark <span className="font-light">Technologies</span>
+                <img 
+                  src="/logo.png" 
+                  alt="Skypark Technologies Logo" 
+                  className="h-10 w-auto"
+                />
+                <span className="text-2xl font-bold text-primary">
+                  Skypark <span className="font-light">Technologies</span>
+                </span>
               </motion.div>
             </Link>
           </div>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const PartnersSection = () => {
   const ref = useRef(null);
@@ -11,16 +11,28 @@ const PartnersSection = () => {
       name: "Reliance",
       subtitle: "Industries Limited",
       logo: "RELIANCE",
+      logoType: "text",
     },
     {
       name: "Polycab",
       subtitle: "India Limited",
       logo: "POLYCAB",
+      logoType: "text",
     },
     {
       name: "Zydus",
       subtitle: "Lifesciences",
       logo: "ZYDUS",
+      logoType: "text",
+    },
+    {
+      name: "Netziya",
+      subtitle: "K IT Infra Services Pvt. Ltd.",
+      tagline: "Smarter IP Address Management (IPAM) Software Solutions",
+      description: "Next-generation, centralized, and intelligent IPAM software tool designed to efficiently monitor, track, and optimize IP resources for secure enterprise networks.",
+      website: "https://www.kitinfraservices.com",
+      logo: "/netziya-logo.png", // Placeholder - update with actual logo path
+      logoType: "image",
     },
   ];
 
@@ -42,27 +54,60 @@ const PartnersSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center justify-items-center">
-          {partners.map((partner, index) => (
-            <motion.div
-              key={partner.name}
-              className="bg-card p-8 rounded-2xl shadow-lg w-full max-w-sm flex items-center justify-center group cursor-pointer"
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}
-              data-testid={`partner-${partner.name.toLowerCase()}`}
-            >
-              <div className="partner-logo text-center">
-                <div className="text-4xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
-                  {partner.logo}
-                </div>
-                <div className="text-sm text-muted-foreground mt-2">
-                  {partner.subtitle}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start justify-items-center">
+          {partners.map((partner, index) => {
+            const PartnerCard = ({ partner, index }) => {
+              const [imageError, setImageError] = useState(false);
+              
+              return (
+                <motion.div
+                  key={partner.name}
+                  className="bg-card p-6 rounded-2xl shadow-lg w-full max-w-sm flex flex-col items-center justify-center group cursor-pointer h-full"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}
+                  data-testid={`partner-${partner.name.toLowerCase()}`}
+                  onClick={() => partner.website && window.open(partner.website, '_blank', 'noopener,noreferrer')}
+                >
+                  <div className="partner-logo text-center w-full">
+                    {partner.logoType === "image" && !imageError ? (
+                      <div className="mb-4 flex justify-center">
+                        <img 
+                          src={partner.logo} 
+                          alt={`${partner.name} Logo`}
+                          className="h-16 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
+                          onError={() => setImageError(true)}
+                        />
+                      </div>
+                    ) : (
+                      <div className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300 mb-2">
+                        {partner.logoType === "image" ? partner.name.substring(0, 2).toUpperCase() : partner.logo}
+                      </div>
+                    )}
+                    <div className="text-lg font-semibold text-primary mb-1">
+                      {partner.name}
+                    </div>
+                    <div className="text-sm text-muted-foreground mb-2">
+                      {partner.subtitle}
+                    </div>
+                    {partner.tagline && (
+                      <div className="text-xs text-muted-foreground italic mb-2">
+                        {partner.tagline}
+                      </div>
+                    )}
+                    {partner.description && (
+                      <div className="text-xs text-muted-foreground mt-2">
+                        {partner.description}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            };
+            
+            return <PartnerCard key={partner.name} partner={partner} index={index} />;
+          })}
         </div>
 
         <motion.div

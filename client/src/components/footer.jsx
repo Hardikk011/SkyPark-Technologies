@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
+import { Link } from "wouter";
 
 const Footer = () => {
   const scrollToSection = (sectionId) => {
@@ -122,6 +123,13 @@ const Footer = () => {
                 >
                   Partners
                 </button>
+              </li>
+              <li>
+                <Link href="/projects">
+                  <span className="hover:text-white transition-colors cursor-pointer">
+                    Projects
+                  </span>
+                </Link>
               </li>
               <li>
                 <a

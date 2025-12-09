@@ -40,6 +40,7 @@ const Navbar = () => {
     { label: "Home", id: "home", isRoute: true, href: "/" },
     { label: "About Us", id: "about" },
     { label: "Partners", id: "partners" },
+    { label: "Projects", id: "projects", isRoute: true, href: "/projects" },
     { label: "Solutions", id: "solutions" },
     { label: "Contact", id: "contact", isRoute: true, href: "/contact" },
   ];

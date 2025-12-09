@@ -65,9 +65,9 @@ const Navbar = () => {
                 data-testid="logo-skypark"
               >
                 <img 
-                  src="/logo.png" 
+                  src="/image-removebg-preview.png" 
                   alt="Skypark Technologies Logo" 
-                  className="h-10 w-10 object-contain flex-shrink-0"
+                  className="h-10 w-auto object-contain flex-shrink-0"
                 />
                 <span className="text-xl md:text-2xl font-bold text-primary whitespace-nowrap">
                   Skypark <span className="font-light">Technologies</span>

@@ -85,13 +85,6 @@ const Contact = () => {
                     <span className="text-lg">15+ Years Experience</span>
                   </div>
                 </div>
-
-                <div className="bg-muted p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold mb-3">Current Position</h3>
-                  <p className="text-primary font-semibold">Advantmed India LLP</p>
-                  <p className="text-muted-foreground">Sr. Firewall and Network L3 Engineer</p>
-                  <p className="text-sm text-muted-foreground mt-2">2023 - Present</p>
-                </div>
               </div>
             </motion.div>
 

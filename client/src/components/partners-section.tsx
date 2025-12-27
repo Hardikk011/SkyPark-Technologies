@@ -8,24 +8,6 @@ const PartnersSection = () => {
 
   const partners = [
     {
-      name: "Reliance",
-      subtitle: "Industries Limited",
-      logo: "RELIANCE",
-      logoType: "text",
-    },
-    {
-      name: "Polycab",
-      subtitle: "India Limited",
-      logo: "POLYCAB",
-      logoType: "text",
-    },
-    {
-      name: "Zydus",
-      subtitle: "Lifesciences",
-      logo: "ZYDUS",
-      logoType: "text",
-    },
-    {
       name: "Netziya",
       subtitle: "K IT Infra Services Pvt. Ltd.",
       tagline: "Smarter IP Address Management (IPAM) Software Solutions",
@@ -54,7 +36,8 @@ const PartnersSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start justify-items-center">
+        <div className="flex justify-center items-center">
+          <div className="grid grid-cols-1 gap-8 items-start justify-items-center max-w-md mx-auto">
           {partners.map((partner, index) => {
             const PartnerCard = ({ partner, index }) => {
               const [imageError, setImageError] = useState(false);
@@ -108,6 +91,7 @@ const PartnersSection = () => {
             
             return <PartnerCard key={partner.name} partner={partner} index={index} />;
           })}
+          </div>
         </div>
 
         <motion.div

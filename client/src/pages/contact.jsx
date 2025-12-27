@@ -103,11 +103,22 @@ const Contact = () => {
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-4">
                     <Phone className="w-6 h-6 text-primary" />
-                    <span className="text-lg" data-testid="contact-phone">+91 8511123546</span>
+                    <a 
+                      href="tel:+917016149008" 
+                      className="text-lg hover:text-primary transition-colors cursor-pointer"
+                      data-testid="contact-phone"
+                    >
+                      +91 70161 49008
+                    </a>
                   </div>
                   <div className="flex items-center space-x-4">
                     <Mail className="w-6 h-6 text-primary" />
-                    <span className="text-lg">rakesh@skypark.tech</span>
+                    <a 
+                      href="mailto:info@skyparktechnologies.com" 
+                      className="text-lg hover:text-primary transition-colors cursor-pointer"
+                    >
+                      info@skyparktechnologies.com
+                    </a>
                   </div>
                   <div className="flex items-center space-x-4">
                     <MapPin className="w-6 h-6 text-primary" />

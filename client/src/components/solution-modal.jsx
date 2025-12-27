@@ -140,17 +140,32 @@ const SolutionModal = ({ solutionId, isOpen, onClose }) => {
                     Contact Information
                   </h3>
                   <div className="space-y-3">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                       <span className="font-medium">General Inquiries:</span>
-                      <span className="text-muted-foreground">info@skyparktechnologies.com</span>
+                      <a 
+                        href="mailto:info@skyparktechnologies.com" 
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        info@skyparktechnologies.com
+                      </a>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                       <span className="font-medium">Technical Support:</span>
-                      <span className="text-muted-foreground">support@skyparktechnologies.com</span>
+                      <a 
+                        href="mailto:support@skyparktechnologies.com" 
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        support@skyparktechnologies.com
+                      </a>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                       <span className="font-medium">Phone:</span>
-                      <span className="text-muted-foreground">+91 85111 23546</span>
+                      <a 
+                        href="tel:+917016149008" 
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        +91 70161 49008
+                      </a>
                     </div>
                     <div className="flex justify-between">
                       <span className="font-medium">Business Hours:</span>

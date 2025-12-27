@@ -160,18 +160,27 @@ const Footer = () => {
           >
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <div className="space-y-2 text-gray-300">
-              <p className="flex items-center">
+              <a 
+                href="mailto:info@skyparktechnologies.com" 
+                className="flex items-center hover:text-white transition-colors cursor-pointer"
+              >
                 <Mail className="w-4 h-4 mr-2" />
                 info@skyparktechnologies.com
-              </p>
-              <p className="flex items-center">
+              </a>
+              <a 
+                href="mailto:support@skyparktechnologies.com" 
+                className="flex items-center hover:text-white transition-colors cursor-pointer"
+              >
                 <Mail className="w-4 h-4 mr-2" />
                 support@skyparktechnologies.com
-              </p>
-              <p className="flex items-center">
+              </a>
+              <a 
+                href="tel:+917016149008" 
+                className="flex items-center hover:text-white transition-colors cursor-pointer"
+              >
                 <Phone className="w-4 h-4 mr-2" />
-                +91 85111 23546
-              </p>
+                +91 70161 49008
+              </a>
               <p className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />
                 Mumbai, India

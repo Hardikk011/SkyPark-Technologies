@@ -12,8 +12,17 @@ export const insertDemoRequestSchema = z.object({
   message: z.string().optional(),
 });
 
+export const insertContactSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  subject: z.string().optional(),
+  message: z.string().min(1),
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type InsertDemoRequest = z.infer<typeof insertDemoRequestSchema>;
+export type InsertContact = z.infer<typeof insertContactSchema>;
 
 export type User = {
   id: string;

@@ -1,13 +1,70 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { Mail, Phone, MapPin, Award, Briefcase, Users, Shield } from "lucide-react";
+import { useRef, useState } from "react";
+import { Mail, Phone, MapPin, Award, Briefcase, Users, Shield, Send, Loader2 } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const achievements = [
+    "Implemented Palo Alto Strata Cloud Manager and SCM migration",
+    "Successfully migrated Firewall (SonicWALL to Palo alto) in USA Datacentre",
+    "Implemented 600+ users New office Setup at Visnagar Infocity and Pune",
+    "Successfully moved all DC Network Devices for collocated Primary Data Centre",
+    "Implemented BGP ECMP between Primary and Secondary MPLS service provider",
+    "Deployed Ahmedabad Smart City DC/DR project with 6000 surveillance cameras"
+  ];
+
+  const experience = [
+    {
+      company: "Advantmed India LLP",
+      position: "Sr. Firewall and Network L3 Engineer",
+      duration: "2023 - Present",
+      type: "Current Position"
+    },
+    {
+      company: "Medusind Solution",
+      position: "L3 Network Engineer",
+      duration: "Oct 2022 - April 2023",
+      type: "Previous Role"
+    },
+    {
+      company: "Allied Digital Services Ltd (Gujarat Gas Ltd)",
+      position: "L3 Network Engineer",
+      duration: "Jan 2019 - Sep 2022",
+      type: "Previous Role"
+    },
+    {
+      company: "WIPRO Ltd (Gujarat Gas Ltd)",
+      position: "L3 Network Engineer",
+      duration: "May 2018 - Jan 2019",
+      type: "Previous Role"
+    }
+  ];
+
+  const certifications = [
+    "CCNA (Cisco Certified Network Associate) - 2012",
+    "FORTIGATE NSE 1 - 2018",
+    "FORTIGATE NSE 2 - 2020"
+  ];
 
   const skills = [
     "Cisco Software Systems (IOS, IOS-XE, NX-OS)",
@@ -17,6 +74,75 @@ const Contact = () => {
     "Network Infrastructure Management (6000+ Users)",
     "Data Centre Operations (DC & DR Management)"
   ];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // Validate form
+      if (!formData.name || !formData.email || !formData.message) {
+        toast({
+          title: "Validation Error",
+          description: "Please fill in all required fields.",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        toast({
+          title: "Invalid Email",
+          description: "Please enter a valid email address.",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Submit contact form
+      await apiRequest("POST", "/api/contact", {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        subject: formData.subject || undefined,
+        message: formData.message,
+      });
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll get back to you soon.",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -93,38 +219,90 @@ const Contact = () => {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-bold text-primary mb-4">Professional Objective</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Highly motivated, proactive and results-oriented individual with 15 years of rich IT 
-                    experience in Network Infrastructure and security. Dedicated to working in innovative 
-                    and challenging environments while utilizing analytical, quantitative and logical skills 
-                    to solve complex problems.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-bold text-primary mb-4">Key Responsibilities</h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li className="flex items-start">
-                      <Shield className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" />
-                      <span>Manage LAN Network of around 6000 Users across multiple locations</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Shield className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" />
-                      <span>Manage 14 India & US Locations switches, Firewalls and Routers</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Shield className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" />
-                      <span>Manage 2 Data Centres (DC & DR) with core infrastructure</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Shield className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" />
-                      <span>Network monitoring, troubleshooting and vendor coordination</span>
-                    </li>
-                  </ul>
-                </div>
+              <div className="bg-card p-8 rounded-2xl shadow-lg">
+                <h3 className="text-2xl font-bold text-primary mb-6">Get In Touch</h3>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <Label htmlFor="name" className="text-foreground">Name *</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your full name"
+                      className="mt-2"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email" className="text-foreground">Email *</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="your.email@example.com"
+                      className="mt-2"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="phone" className="text-foreground">Phone</Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="+91 12345 67890"
+                      className="mt-2"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="subject" className="text-foreground">Subject</Label>
+                    <Input
+                      id="subject"
+                      name="subject"
+                      type="text"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder="What is this regarding?"
+                      className="mt-2"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="message" className="text-foreground">Message *</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell us how we can help you..."
+                      className="mt-2 min-h-[120px]"
+                      rows={5}
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                </form>
               </div>
             </motion.div>
           </div>

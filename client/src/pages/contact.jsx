@@ -9,48 +9,6 @@ const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const achievements = [
-    "Implemented Palo Alto Strata Cloud Manager and SCM migration",
-    "Successfully migrated Firewall (SonicWALL to Palo alto) in USA Datacentre",
-    "Implemented 600+ users New office Setup at Visnagar Infocity and Pune",
-    "Successfully moved all DC Network Devices for collocated Primary Data Centre",
-    "Implemented BGP ECMP between Primary and Secondary MPLS service provider",
-    "Deployed Ahmedabad Smart City DC/DR project with 6000 surveillance cameras"
-  ];
-
-  const experience = [
-    {
-      company: "Advantmed India LLP",
-      position: "Sr. Firewall and Network L3 Engineer",
-      duration: "2023 - Present",
-      type: "Current Position"
-    },
-    {
-      company: "Medusind Solution",
-      position: "L3 Network Engineer",
-      duration: "Oct 2022 - April 2023",
-      type: "Previous Role"
-    },
-    {
-      company: "Allied Digital Services Ltd (Gujarat Gas Ltd)",
-      position: "L3 Network Engineer",
-      duration: "Jan 2019 - Sep 2022",
-      type: "Previous Role"
-    },
-    {
-      company: "WIPRO Ltd (Gujarat Gas Ltd)",
-      position: "L3 Network Engineer",
-      duration: "May 2018 - Jan 2019",
-      type: "Previous Role"
-    }
-  ];
-
-  const certifications = [
-    "CCNA (Cisco Certified Network Associate) - 2012",
-    "FORTIGATE NSE 1 - 2018",
-    "FORTIGATE NSE 2 - 2020"
-  ];
-
   const skills = [
     "Cisco Software Systems (IOS, IOS-XE, NX-OS)",
     "Nexus 9000 Switching & Cisco FEX 2000",
@@ -91,11 +49,9 @@ const Contact = () => {
             >
               <div className="bg-card p-8 rounded-2xl shadow-lg">
                 <h2 className="text-3xl font-bold text-primary mb-6">
-                  Rakesh P. Prajapati
+                  Dhiren P. Prajapati
                 </h2>
-                <p className="text-xl text-muted-foreground mb-6">
-                  Sr. Firewall and Network L3 Engineer
-                </p>
+                
                 <p className="text-lg text-muted-foreground mb-8">
                   Founder & Chief Technology Officer at Skypark Technologies
                 </p>
